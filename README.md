@@ -1,4 +1,6 @@
 Demo: https://chhaymenghong.github.io/Genetic-Algorithm-String-Generation/
+
+
 Sample input:
 Target: hello world
 Population: 50
