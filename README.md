@@ -1,7 +1,14 @@
-Demo: https://chhaymenghong.github.io/Genetic-Algorithm-String-Generation/
+# Demo:
+https://chhaymenghong.github.io/Genetic-Algorithm-String-Generation/
 
 
-Sample input:
+# Tech:
+D3: https://d3js.org/
+
+# Description:
+
+
+# Sample input:
 
 Target: hello sunshine from Mars
 
