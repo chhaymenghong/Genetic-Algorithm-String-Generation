@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+
+html {
+  height: 100%;
+  width: 100%;
+}
+body {
+  min-height: 100%;
+  min-width: 100%;
+}
+
+svg {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.update {
+  fill: #333;
+}
+
+.enter {
+  fill: green;
+}
+
+.exit {
+  fill: brown;
+}
+
+#test {
+  height: 100000px;
+  width: 100%;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+}

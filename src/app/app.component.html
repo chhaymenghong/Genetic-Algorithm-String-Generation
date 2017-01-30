@@ -1,0 +1,52 @@
+
+  <div class="row" id="test">
+      <div class="col-xs-4">
+        <form (ngSubmit)="start( configForm )" #configForm="ngForm">
+          <div class="form-group">
+
+              <!-- Target Input -->
+              <input [ngStyle]="{'display':'inline'}" #targetInput="ngModel" [(ngModel)]="target" name="target" required type="text" class="form-control" placeholder="Target String">
+              <div [hidden]="targetInput.valid || targetInput.pristine" class="alert alert-danger">
+                <span>Target string required!</span>
+              </div>
+
+              <!-- Population Count Input -->
+              <input #popCountInput="ngModel" [(ngModel)]="populationTotal" name="populationTotal" required type="text" class="form-control" placeholder="Population Size">
+              <div [hidden]="popCountInput.valid || popCountInput.pristine" class="alert alert-danger">
+                <span>Population count required!</span>
+              </div>
+
+              <!-- Mutation Rate Input -->
+              <input #mutationRateInput="ngModel" [(ngModel)]="mutationRate" name="mutationRate" required type="text" class="form-control" placeholder="Mutation Rate">
+              <div [hidden]="mutationRateInput.valid || mutationRateInput.pristine" class="alert alert-danger">
+                <span>Mutation rate required!</span>
+              </div>
+
+              <!-- Animation Speed Input -->
+              <!-- Note: animationSpeed is a two way data-binding properties and can be from the .ts class. Make sure not to use the same name
+              if dont want this two ways binding change -->
+              <input #animationSpeedInput="ngModel" [(ngModel)]="animationSpeed" name="animationSpeed" required type="text" class="form-control" placeholder="Aimation Speed in ms">
+              <div [hidden]="animationSpeedInput.valid || animationSpeedInput.pristine" class="alert alert-danger">
+                <span>Animation Speed in ms required!</span>
+              </div>
+
+
+              <button [ngStyle]="{'white-space': 'normal', 'width': '100%'}" [disabled]="!configForm.form.valid" type="submit" class="btn btn-primary .btn-lg">
+                <span [ngStyle]="{'font-size' : '25px'}">Find Solution</span>
+              </button>
+
+              <span [ngStyle]="{'margin-top' : '10px', 'width' : '100%', 'display' : 'inline-block', 'font-size' : '25px'}" class="label label-success">
+                 Generation <span [ngStyle]="{'font-size' : '25px'}" class="badge">{{generationNum}}</span>
+              </span>
+              <!-- <button [ngStyle]="{'margin-top' : '10px', 'width': '100%'}"class="btn btn-success" type="button">
+                Generation <span class="badge">{{generationNum}}</span>
+              </button> -->
+
+          </div>
+        </form>
+      </div>
+
+    <!-- For svg -->
+    <div class="col-xs-8 container">
+    </div>
+  </div>

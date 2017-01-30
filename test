@@ -1,0 +1,67 @@
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { DNA } from './DNA';
+import { Population } from './Population';
+import { Observable } from 'rxjs';
+import { D3Service, D3, Selection } from 'd3-ng2-service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit {
+  public population : Population;
+  private _d3 : D3;
+  private _targetLen : number;
+  public target : string;
+
+  constructor( private _el: ElementRef, private _d3Service : D3Service ) {
+    let poluationTotal = 100;
+    let mutationRate = 0.01;
+    let target = 'Easy Peazy'.toLowerCase();
+    this.target = target;
+    this._targetLen = target.length;
+    this.population = new Population( poluationTotal, mutationRate, target );
+    this._d3 = _d3Service.getD3();
+  }
+
+  ngOnInit() {
+    let g = this._setupSvg();
+    let generationNum = 0;
+    let timer = this._d3.interval( () => {
+      this.population.initializePopulationPool();
+      let data = this.population.currentPool[ 0 ];
+      this._updateData( data.sequences, g );
+
+      this.population.performCrossOver();
+      this.population.performMutation();
+      let index = this.population.evaluate();
+      if ( index != -1 ) {
+        console.log( "Final Generation #: " + generationNum );
+        console.log( this.population.currentPool[ index ] );
+        timer.stop();
+      }
+      generationNum++;
+    }, 100 )
+  }
+
+  private _setupSvg() {
+    let width = '80%';
+    let height = '100%';
+    let svg = this._d3.select( 'svg' )
+                .attr( 'width', width )
+                .attr( 'height', height );
+    let g = svg.append( 'g' )
+               .attr( 'transform', "translate(0" + ",100)" );
+    return g;
+  }
+
+
+  private _updateData( data, g ) {
+    // With key function, the element with the new letter will be marked as enter instead of update
+    let updateSelection = g.selectAll('text').data( data, ( d ) => d ).attr( 'class', 'update' )
+                                                                      .attr( 'y', 100 )
+                                                                      .attr( 'fill-opacity', 1);
+    updateSelection.transition()
+                   .attr( 'x', ( d, i ) => i * 32 )
+                   .duration( 100 )
